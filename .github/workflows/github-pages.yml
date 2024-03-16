@@ -37,7 +37,7 @@ jobs:
           node-version: "21.x"
       - name: Build
         run: cd ./client; npm install; npm run build;
-      - name: Deploy
+      - name: Upload
         uses: actions/upload-pages-artifact@v3
       - name: Deploy to GitHub Pages
         id: deployment
