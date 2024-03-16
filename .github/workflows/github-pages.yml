@@ -35,15 +35,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "21.x"
-      - name: Install Dependencies
+      - name: Build
         run: cd ./client; npm install; npm run build;
-      # - name: Build
-      #   run: npm run build
       - name: Deploy
         uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: "."
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
