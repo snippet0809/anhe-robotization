@@ -1,5 +1,5 @@
 # Simple workflow for deploying vue content to GitHub Pages
-name: Deploy vue content to Pages
+name: Deploy static content to Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -19,7 +19,7 @@ permissions:
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   # Single deploy job since we're just deploying
@@ -34,10 +34,13 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "21.x"
+          node-version: "21"
+          cache: npm
       - name: Build
-        run: cd ./client; npm install; npm run build;
-      - name: Upload
+        run: cd ./client; npm ci; npm run build;
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./client/dist
